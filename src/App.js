@@ -4,7 +4,7 @@ import '@chatui/core/es/styles/index.less';
 // 引入组件
 import Chat, {Bubble, useMessages} from '@chatui/core';
 import {defaultQuickReplies} from "./compoments/quickReplys";
-import {createTextBotMsg, initialMessages} from "./compoments/initMsg";
+import {createImgBotMsg, createTextBotMsg, initialMessages} from "./compoments/initMsg";
 // 引入样式
 import '@chatui/core/dist/index.css';
 import userAvatar from "./assets/userAvatar.jpg";
@@ -26,8 +26,17 @@ const App = () => {
 			setTyping(true);
 			let botOutput = await getRasaResponse(val)
 			setTimeout(async () => {
-				botOutput.forEach((item)=>{
-					appendMsg(createTextBotMsg(item.text))
+				let msg;
+				botOutput.forEach((item) => {
+					console.log(item.text, item.image)
+					if (item.text !== undefined) {
+						msg = createTextBotMsg(item.text)
+					} else if (item.image !== undefined) {
+						let src = decodeURI(item.image)
+
+						msg = createImgBotMsg(src)
+					}
+					appendMsg(msg)
 				})
 				;
 			}, 1000);
@@ -41,8 +50,15 @@ const App = () => {
 
 
 	function renderMessageContent(msg) {
-		const {content} = msg;
-		return <Bubble content={content.text}/>;
+		const {type, content} = msg;
+		switch (type) {
+			case 'image':
+				return <Bubble type="image">
+					<img src={content.picUrl} alt=""/>
+				</Bubble>
+			default:
+				return <Bubble content={content.text}/>;
+		}
 	}
 
 	return (

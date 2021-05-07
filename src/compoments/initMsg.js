@@ -1,4 +1,4 @@
-import userAvatar from '../assets/sara_avatar.png'
+import saraAvatar from '../assets/sara_avatar.png'
 
 
 export function createTextBotMsg(botText) {
@@ -6,7 +6,15 @@ export function createTextBotMsg(botText) {
 	return {
 		type: 'text',
 		content: {text: botText},
-		user: {avatar: userAvatar},
+		user: {avatar: saraAvatar},
+	}
+}
+
+export function createImgBotMsg(src) {
+	return {
+		type: 'image',
+		content: {picUrl: src},
+		user: {avatar: saraAvatar},
 	}
 }
 
