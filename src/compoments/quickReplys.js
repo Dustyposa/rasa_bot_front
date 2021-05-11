@@ -2,7 +2,7 @@
 export const defaultQuickReplies = [
 	{
 		icon: 'search',
-		name: 'rasax是啥',
+		name: 'BTC价格',
 		isNew: true,
 		isHighlight: true,
 	},
