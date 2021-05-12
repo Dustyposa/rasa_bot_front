@@ -2,7 +2,7 @@ import axios from "axios";
 import {createImgBotMsg, createTextBotMsg} from "./msgManager";
 
 const RasaRestUrl = 'http://localhost:5005/webhooks/rest/webhook'
-const postToRasa = async (userInput) => {
+export const postToRasa = async (userInput) => {
 
 	return await axios.post(RasaRestUrl,
 		{'sender': '123', 'message': userInput}
@@ -11,16 +11,6 @@ const postToRasa = async (userInput) => {
 	}).catch(function (error) {
 		return [{'text': '使者遭遇了 Boss，请稍后再试～', 'recipient_id': '123'}]
 	})
-}
-
-function rasaReqBody(userInput) {
-	return {
-		url: RasaRestUrl,
-		data: {
-			'sender': '123',
-			'message': userInput
-		}
-	}
 }
 
 export const getRasaResponse = async (msg) => {
@@ -33,6 +23,11 @@ export const getRasaResponse = async (msg) => {
 
 export function parseResponse(res, reqType) {
 	let botResponse = []
+
+	if (res === undefined) {
+			return botResponse
+	}
+	console.log("Res:", res)
 	res.forEach((item) => {
 		let msg;
 		if (item.text !== undefined) {
