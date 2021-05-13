@@ -1,4 +1,5 @@
 import {parseResponse, postToRasa} from "./rasaUtil";
+import {initBotConfig} from "../compoments/initConfig";
 
 export const onToolbarClick = async (item, ctx) => {
 	// 如果点的是“相册”
@@ -22,6 +23,7 @@ export const onToolbarClick = async (item, ctx) => {
 							function (r) {
 								let msg = parseResponse(r)
 								msg.forEach((item) => {
+									item.user = initBotConfig()
 									ctx.appendMessage(item)
 								})
 							}
@@ -36,4 +38,25 @@ export const onToolbarClick = async (item, ctx) => {
 			},
 		});
 	}
+}
+
+export function CardButtonOnClick(ctx) {
+	console.log("ctx1:", ctx)
+	const innerCardButtonOnClick = async (event) => {
+		const userIn = event.target.value
+		console.log("ctx:", ctx)
+		await postToRasa(userIn).then(
+			(r) => {
+				let msg = parseResponse(r)
+				msg.forEach((item) => {
+					item.user = initBotConfig()
+					item.position = 'center'  // maybe a bug
+					console.log("item:", item)
+					ctx.appendMessage(item)
+				})
+			}
+		)
+	}
+	return innerCardButtonOnClick
+
 }

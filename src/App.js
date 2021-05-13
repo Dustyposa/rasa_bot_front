@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {BotConfig} from "./compoments/initConfig";
 import {getRasaResponse, parseResponse} from "./utils/rasaUtil";
 import {onToolbarClick} from "./utils/handlers";
-
+import buttonCard from "./compoments/card";
 
 const App = () => {
 		const wrapper = useRef();
@@ -18,6 +18,9 @@ const App = () => {
 					handlers: {
 						parseResponse: parseResponse,
 						onToolbarClick: onToolbarClick
+					},
+					components: {
+						'buttonCard': buttonCard
 					}
 				});
 				bot.run();

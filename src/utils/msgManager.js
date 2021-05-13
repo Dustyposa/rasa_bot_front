@@ -26,3 +26,19 @@ export function createImgBotMsg(src) {
 		user: {avatar: botAvatar},
 	}
 }
+
+
+export function createCardMsg(data, cardType) {
+	switch (cardType) {
+		default: {
+			return {
+				type: 'card',
+				content: {
+					code: "buttonCard",
+					data: data
+				},
+				user: {avatar: botAvatar}
+			}
+		}
+	}
+}

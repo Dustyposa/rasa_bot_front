@@ -4,8 +4,6 @@ import {defaultQuickReplies} from "./quickReplys";
 import {createTextBotMsg} from "../utils/msgManager";
 
 
-
-
 const initialMessages = [
 	createTextBotMsg('光能使者进入对话，为你服务！', 'system'),
 	createTextBotMsg('久等了，你可以随便问问问哦！'),
@@ -17,7 +15,7 @@ function initNavBar() {
 	}
 }
 
-function initBotConfig() {
+export function initBotConfig() {
 	return {
 		avatar: botAvatar
 	}
@@ -38,10 +36,10 @@ export const BotConfig = {
 	quickReplies: defaultQuickReplies,//快捷短语
 	placeholder: '随便输点...', // 输入框占位符
 	toolbar: [
-      {
-        type: 'image',
-        icon: 'image',
-        title: '相册',
-      },
-    ],
+		{
+			type: 'image',
+			icon: 'image',
+			title: '相册',
+		},
+	],
 }

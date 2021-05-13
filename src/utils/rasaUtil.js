@@ -1,5 +1,5 @@
 import axios from "axios";
-import {createImgBotMsg, createTextBotMsg} from "./msgManager";
+import {createCardMsg, createImgBotMsg, createTextBotMsg} from "./msgManager";
 
 const RasaRestUrl = 'http://localhost:5005/webhooks/rest/webhook'
 export const postToRasa = async (userInput) => {
@@ -32,11 +32,21 @@ export function parseResponse(res, reqType) {
 		let msg;
 		if (item.text !== undefined) {
 			msg = createTextBotMsg(item.text)
-		} else if (item.image !== undefined) {
+			botResponse.push(msg)
+
+		}
+		if (item.image !== undefined) {
 			let src = decodeURI(item.image)
 			msg = createImgBotMsg(src)
+			botResponse.push(msg)
+
 		}
-		botResponse.push(msg)
+		if (item.buttons !== undefined) {
+			msg = createCardMsg(item.buttons)
+			botResponse.push(msg)
+
+		}
+
 	})
 	return botResponse
 }
