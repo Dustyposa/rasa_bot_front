@@ -17,7 +17,7 @@ npm run start
 [https://github.com/Dustyposa/rasa_bot_front_dist](https://github.com/Dustyposa/rasa_bot_front_dist)
 
 #### 界面展示
-![image.png](https://i.loli.net/2021/05/14/bsRrudLX1Fzpng7.png)
+[![grY7ZD.png](https://z3.ax1x.com/2021/05/14/grY7ZD.png)](https://imgtu.com/i/grY7ZD)
 
 
 #### 待优化
